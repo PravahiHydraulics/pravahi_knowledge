@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <title>Pravahi CMS</title>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   </head>
   <body>
     <script>
-      CMS.init();
+      window.CMS_MANUAL_INIT = true;
     </script>
+    <script>
+      fetch("./config.yml")
+        .then(response => response.text())
+        .then(config => {
+          window.CMS.init({ config: YAML.parse(config) });
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
   </body>
 </html>
